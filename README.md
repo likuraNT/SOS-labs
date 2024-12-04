@@ -3,8 +3,8 @@
 
 ## Structure of repos
 <ins>**`labs/`**</ins> -- labs directory
-* `labs/1-lab` - first lab
-* `labs/2-lab` - second lab
+* `labs/1_lab` - first lab
+* `labs/2_lab` - second lab
 
 <ins>**`examples/`**</ins> -- examples from lecture
 * `labs/lab21` - first example
