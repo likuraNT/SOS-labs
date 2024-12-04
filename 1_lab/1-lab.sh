@@ -38,11 +38,11 @@ function __help__
 {
 	echo "Using: $0 [Options]"
 	echo "Options:"
-	echo " -u, --users		Output a list of users and their home directories."
-	echo " -p, --processes          Output a list of running processes, sorted by ID."
-	echo " -h, --help		Display help menu."
-	echo " -l PATH, --log PATH	Log output to the file."
-	echo " -e PATH, --errors PATH	Log errors to the file."
+	echo " -u, --users			Output a list of users and their home directories."
+	echo " -p, --processes          	Output a list of running processes, sorted by ID."
+	echo " -h, --help			Display help menu."
+	echo " -l PATH, --log PATH		Log output to the file."
+	echo " -e PATH, --errors PATH		Log errors to the file."
 }
 
 LOG_PATH=""
