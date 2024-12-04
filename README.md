@@ -3,10 +3,10 @@
 
 ## Structure of repos
 <ins>**`labs/`**</ins> -- labs directory
-* `labs/lab1` - first lab
-* `labs/lab2` - second lab
+* `labs/1-lab` - first lab
+* `labs/2-lab` - second lab
 
-<ins>**`lect_examples/`**</ins> -- examples from lecture
+<ins>**`examples/`**</ins> -- examples from lecture
 * `labs/lab21` - first example
 * `labs/lab32` - second example
 
