@@ -49,9 +49,9 @@ LOG_PATH=""
 ERR_PATH=""
 while getopts ":uphl:e:-:" opt; do
 	case $opt in
-	u) __users__ ;;
-	p) __processes__ ;;
-	h) __help__; exit 0 ;;
+	u) __log_check__; __users__ ;;
+	p) __log_check__; __processes__ ;;
+	h) __log_check__;  __help__; exit 0 ;;
 	l) LOG_PATH="$OPTARG" ;;
 	e) ERR_PATH="$OPTARG" ;;
 	-)
