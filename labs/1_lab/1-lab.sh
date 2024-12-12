@@ -3,7 +3,7 @@
 function __users__
 {
 	echo "Users list:"
-	awk -F':' '{print $1, $6 }' /etc/passwd | sort
+	awk -F: '$3 >= 1000 {print $1,"\t" $6 }' /etc/passwd | sort
 }
 
 function __processes__
@@ -11,6 +11,9 @@ function __processes__
 	echo "Processes list:"
 	ps -eo pid,comm --sort=pid
 }
+DEFAULT_LOG_PATH="default.log"
+LOG_PATH="log.log"
+ERR_PATH="err.log"
 
 function __log_check__
 {
@@ -19,6 +22,7 @@ function __log_check__
         		echo "Have no permissions to: $LOG_PATH" >&2
         		exit 1
     		fi
+    		touch "$LOG_PATH"
     		exec > "$LOG_PATH"
 	fi
 }
@@ -30,7 +34,9 @@ function __errors_check__
         		echo "Have no permissions to: $ERR_PATH" >&2
         		exit 1
     		fi
-    		exec 2> "$ERR_PATH"
+    		touch "$ERR_PATH"
+    		echo "Have no errors." > "$ERR_PATH"
+    		exit 1
 	fi
 }
 
@@ -45,19 +51,18 @@ function __help__
 	echo " -e PATH, --errors PATH		Log errors to the file."
 }
 
-LOG_PATH=""
-ERR_PATH=""
+
 while getopts ":uphl:e:-:" opt; do
 	case $opt in
-	u) __log_check__; __users__ ;;
-	p) __log_check__; __processes__ ;;
-	h) __log_check__;  __help__; exit 0 ;;
+	u) __users__; __users__ > "$DEFAULT_LOG_PATH" ;;
+	p) __processes__; __processes__ > "$DEFAULT_LOG_PATH" ;;
+	h) __help__; exit 0 ;;
 	l) LOG_PATH="$OPTARG" ;;
 	e) ERR_PATH="$OPTARG" ;;
 	-)
 		case "${OPTARG}" in
-			users) __users__ ;;
-			processes) __processes__ ;;
+			users) __users__   ;;
+			processes) __processes__;;
 			help) __help__; exit 0 ;;
 			log) LOG_PATH=${!OPTIND}"; OPTIND=$(( $OPTIND + 1)) ;;
 			errors) ERR_PATH=${!OPTIND}"; OPTIND=$(( $OPTIND +1)) ;;
@@ -67,6 +72,5 @@ while getopts ":uphl:e:-:" opt; do
 	:) echo "Option -${OPTARG} needs an argument." >&2; exit 1 ;;
 	esac
 done
-
-__log_check__ "$LOG_PATH"
-__errors_check__ "$ERR_PATH"
+__errors_check__ "ERR_PATH"
+__log_check__ "LOG_PATH"

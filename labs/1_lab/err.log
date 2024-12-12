@@ -1,0 +1,7 @@
+Usage: ./1.2_lab.sh [options]
+Options:
+  -u, --users            List users and their home directories
+  -p, --processes        List running processes
+  -h, --help             Show this help message
+  -l PATH, --log PATH    Redirect output to a file at PATH
+  -e PATH, --errors PATH Redirect error output to a file at PATH
